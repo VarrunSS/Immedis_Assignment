@@ -1,0 +1,4 @@
+D:\VARUN - ALL DATA\Learning\Interview\companies\TaxBack\code\Immedis_Assignment\EmployeeManagementApplication\EmployeeManagement.DataAccess\bin\Debug\netcoreapp3.1\EmployeeManagement.DataAccess.deps.json
+D:\VARUN - ALL DATA\Learning\Interview\companies\TaxBack\code\Immedis_Assignment\EmployeeManagementApplication\EmployeeManagement.DataAccess\bin\Debug\netcoreapp3.1\EmployeeManagement.DataAccess.dll
+D:\VARUN - ALL DATA\Learning\Interview\companies\TaxBack\code\Immedis_Assignment\EmployeeManagementApplication\EmployeeManagement.DataAccess\obj\Debug\netcoreapp3.1\EmployeeManagement.DataAccess.AssemblyInfoInputs.cache
+D:\VARUN - ALL DATA\Learning\Interview\companies\TaxBack\code\Immedis_Assignment\EmployeeManagementApplication\EmployeeManagement.DataAccess\obj\Debug\netcoreapp3.1\EmployeeManagement.DataAccess.AssemblyInfo.cs
