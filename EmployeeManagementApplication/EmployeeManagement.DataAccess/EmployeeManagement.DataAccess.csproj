@@ -8,4 +8,9 @@
     <PackageReference Include="Dapper" Version="2.0.90" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EmployeeManagement.Service\EmployeeManagement.Service.csproj" />
+    <ProjectReference Include="..\EmployeeManagement.Utility\EmployeeManagement.Utility.csproj" />
+  </ItemGroup>
+
 </Project>

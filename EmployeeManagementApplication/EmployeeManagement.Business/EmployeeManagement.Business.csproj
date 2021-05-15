@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EmployeeManagement.DataAccess\EmployeeManagement.DataAccess.csproj" />
+    <ProjectReference Include="..\EmployeeManagement.Service\EmployeeManagement.Service.csproj" />
+  </ItemGroup>
+
 </Project>

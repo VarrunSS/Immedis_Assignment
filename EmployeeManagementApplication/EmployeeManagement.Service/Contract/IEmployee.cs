@@ -9,7 +9,7 @@ namespace EmployeeManagement.Service.Contract
     {
         int ID { get; set; }
 
-        int DisplayGUID { get; set; }
+        Guid DisplayGUID { get; set; }
 
         string Name { get; set; }
 

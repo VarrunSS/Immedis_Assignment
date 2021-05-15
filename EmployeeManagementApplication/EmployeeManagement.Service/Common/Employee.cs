@@ -10,13 +10,14 @@ namespace EmployeeManagement.Service.Common
     {
         public Employee()
         {
+            DisplayGUID = Guid.NewGuid();
             LineManager = new Employee();
             Comments = new List<IComment>();
         }
 
         public int ID { get; set; }
 
-        public int DisplayGUID { get; set; }
+        public Guid DisplayGUID { get; set; }
 
         public string Name { get; set; }
 
