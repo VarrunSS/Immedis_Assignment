@@ -6,7 +6,7 @@ namespace EmployeeManagement.Utility
 {
     public class ConnectionHelper
     {
-        private const string ConnectionString = "Data Source=USCHWSQL1056D;Initial Catalog=DEV_INTELLIGENCE_WEB;Integrated Security=True;Application Name=Campaign Manager Dev;";
+        private const string ConnectionString = "Data Source=***;Initial Catalog=***;Integrated Security=True;Application Name=***;";
 
         public static IDbConnection GetDbContext()
         {
