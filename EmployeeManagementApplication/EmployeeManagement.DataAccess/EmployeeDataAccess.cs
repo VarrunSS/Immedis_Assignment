@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
@@ -9,23 +10,39 @@ using EmployeeManagement.Service.Contract;
 using EmployeeManagement.Service.ViewModel;
 using EmployeeManagement.Service.ViewModel.Param;
 using EmployeeManagement.Utility;
+using Microsoft.Extensions.Logging;
 
 namespace EmployeeManagement.DataAccess
 {
     public class EmployeeDataAccess : IEmployeeDataAccess
     {
+        private readonly ILogger<EmployeeDataAccess> _logger;
+
+        public EmployeeDataAccess(ILogger<EmployeeDataAccess> logger)
+        {
+            _logger = logger;
+        }
+
         public async Task<List<Employee>> GetAllEmployeeAsync()
         {
             var result = new List<Employee>();
 
             try
             {
-                using (var conn = ConnectionHelper.GetDbContext())
-                    result = (await conn.QueryAsync<Employee>(QueryHelper.GetAllEmployees)).AsList();
+                using var conn = ConnectionHelper.GetDbContext();
+                result = (await conn.QueryAsync<Employee, Employee, Employee>(
+                    QueryHelper.GetAllEmployees,
+                    (employee, manager) =>
+                    {
+                        //employee.LineManager = manager;
+                        return employee;
+                    },
+                    splitOn: "ID")
+                    ).Distinct().AsList();
             }
             catch (Exception ex)
             {
-
+                _logger.LogWarning($"Error occured. Message: {ex.Message}");
             }
             finally
             {
@@ -44,7 +61,7 @@ namespace EmployeeManagement.DataAccess
             }
             catch (Exception ex)
             {
-
+                _logger.LogWarning($"Error occured. Message: {ex.Message}");
             }
             finally
             {
@@ -66,7 +83,7 @@ namespace EmployeeManagement.DataAccess
             }
             catch (Exception ex)
             {
-
+                _logger.LogWarning($"Error occured. Message: {ex.Message}");
             }
             finally
             {
@@ -88,7 +105,7 @@ namespace EmployeeManagement.DataAccess
             }
             catch (Exception ex)
             {
-
+                _logger.LogWarning($"Error occured. Message: {ex.Message}");
             }
             finally
             {
@@ -110,7 +127,7 @@ namespace EmployeeManagement.DataAccess
             }
             catch (Exception ex)
             {
-
+                _logger.LogWarning($"Error occured. Message: {ex.Message}");
             }
             finally
             {
@@ -118,7 +135,6 @@ namespace EmployeeManagement.DataAccess
             }
             return result;
         }
-
 
     }
 }

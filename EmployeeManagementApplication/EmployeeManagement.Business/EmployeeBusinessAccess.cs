@@ -7,23 +7,29 @@ using EmployeeManagement.Service.Common;
 using EmployeeManagement.Service.Contract;
 using EmployeeManagement.Service.ViewModel;
 using EmployeeManagement.Service.ViewModel.Param;
+using Microsoft.Extensions.Logging;
 
 namespace EmployeeManagement.Business
 {
     public class EmployeeBusinessAccess : IEmployeeBusinessAccess
     {
-        private readonly IEmployeeDataAccess dataAccess = null;
+        private readonly ILogger<EmployeeBusinessAccess> _logger;
+        private readonly IEmployeeDataAccess _dataAccess = null;
 
-        public EmployeeBusinessAccess()
+        public EmployeeBusinessAccess(ILogger<EmployeeBusinessAccess> logger,
+            IEmployeeDataAccess dataAccess
+        )
         {
+            _logger = logger;
+            _dataAccess = dataAccess;
         }
 
         public async Task<EmployeeViewModel> CreateEmployeeAsync(EmployeeViewModelParam param)
         {
-            var resp = await dataAccess.CreateEmployeeAsync(param);
+            var resp = await _dataAccess.CreateEmployeeAsync(param);
             if (resp.IsSuccess)
             {
-                param.DisplayGUID = Guid.Parse(resp.Message);
+                param.ID = Int32.Parse(resp.Message);
 
                 var result = await GetEmployeeAsync(param); // get employee details
                 return result;
@@ -33,17 +39,17 @@ namespace EmployeeManagement.Business
 
         public async Task<List<Employee>> GetAllEmployeeAsync()
         {
-            return await dataAccess.GetAllEmployeeAsync();
+            return await _dataAccess.GetAllEmployeeAsync();
         }
 
         public async Task<EmployeeViewModel> GetEmployeeAsync(EmployeeViewModelParam param)
         {
-            return await dataAccess.GetEmployeeAsync(param);
+            return await _dataAccess.GetEmployeeAsync(param);
         }
 
         public async Task<EmployeeViewModel> UpdateEmployeeAsync(EmployeeViewModelParam param)
         {
-            var resp = await dataAccess.UpdateEmployeeAsync(param);
+            var resp = await _dataAccess.UpdateEmployeeAsync(param);
             if (resp.IsSuccess)
             {
                 var result = await GetEmployeeAsync(param); // get employee details
@@ -54,7 +60,7 @@ namespace EmployeeManagement.Business
 
         public async Task<EmployeeViewModel> DeleteEmployeeAsync(EmployeeViewModelParam param)
         {
-            var resp = await dataAccess.DeleteEmployeeAsync(param);
+            var resp = await _dataAccess.DeleteEmployeeAsync(param);
             if (resp.IsSuccess)
             {
             }

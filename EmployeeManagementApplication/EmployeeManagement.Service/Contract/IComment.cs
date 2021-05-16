@@ -6,6 +6,10 @@ namespace EmployeeManagement.Service.Contract
 {
     public interface IComment
     {
+        int ID { get; set; }
+
+        int EmployeeID { get; set; }
+
         DateTime CreatedOn { get; set; }
 
         string Author { get; set; }

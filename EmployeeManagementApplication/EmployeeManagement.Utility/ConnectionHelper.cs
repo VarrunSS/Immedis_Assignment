@@ -12,5 +12,7 @@ namespace EmployeeManagement.Utility
         {
             return new SqlConnection(ConnectionString);
         }
+
+        
     }
 }
