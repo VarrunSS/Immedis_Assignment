@@ -40,12 +40,15 @@ namespace EmployeeManagement.DataAccess
 
         public async Task<IDbResponse> CreateEmployeeAsync(EmployeeViewModelParam param)
         {
-            await _context.Employees.AddAsync(param);
+            IDbResponse result = new DbResponse(true);
+
+            var input = param.FormatData();
+            await _context.Employees.AddAsync(input);
             var data = await _context.SaveChangesAsync();
 
-            IDbResponse result = new DbResponse(true);
             if (data == 0)
                 result = new DbResponse(false, "Failed");
+            else result.Message = input.ID.ToString();
             return result;
         }
 
@@ -70,7 +73,7 @@ namespace EmployeeManagement.DataAccess
 
         public async Task<IDbResponse> DeleteEmployeeAsync(EmployeeViewModelParam param)
         {
-            IDbResponse result = new DbResponse();
+            IDbResponse result = new DbResponse(true);
             _context.Entry(param).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
             return result;

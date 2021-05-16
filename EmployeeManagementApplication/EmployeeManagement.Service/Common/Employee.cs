@@ -22,6 +22,7 @@ namespace EmployeeManagement.Service.Common
 
         public string Title { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime DateOfJoining { get; set; }
 
         public double Salary { get; set; }

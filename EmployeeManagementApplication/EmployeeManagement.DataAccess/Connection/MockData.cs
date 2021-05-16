@@ -18,7 +18,7 @@ namespace EmployeeManagement.DataAccess.Connection
                     FullName = $"Employee {ind}",
                     Title = $"SDE {ind % 10}",
                     DateOfJoining = new DateTime(2020, 01, 01).AddDays(ind),
-                    Salary = new Random().NextDouble() * 10000,
+                    Salary = Math.Round(new Random().NextDouble() * 10000, 2),
                     SalaryType = "Monthly",
                     Department = $"Department {ind}",
                     LineManagerID = ind - 1,

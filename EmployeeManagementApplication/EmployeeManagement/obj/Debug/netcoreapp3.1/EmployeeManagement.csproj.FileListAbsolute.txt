@@ -157,3 +157,4 @@ D:\VARUN - ALL DATA\Learning\Interview\companies\TaxBack\code\Immedis_Assignment
 D:\VARUN - ALL DATA\Learning\Interview\companies\TaxBack\code\Immedis_Assignment\EmployeeManagementApplication\EmployeeManagement\bin\Debug\netcoreapp3.1\Microsoft.Web.Infrastructure.dll
 D:\VARUN - ALL DATA\Learning\Interview\companies\TaxBack\code\Immedis_Assignment\EmployeeManagementApplication\EmployeeManagement\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 D:\VARUN - ALL DATA\Learning\Interview\companies\TaxBack\code\Immedis_Assignment\EmployeeManagementApplication\EmployeeManagement\obj\Debug\netcoreapp3.1\EmployeeManagement.MvcApplicationPartsAssemblyInfo.cs
+D:\VARUN - ALL DATA\Learning\Interview\companies\TaxBack\code\Immedis_Assignment\EmployeeManagementApplication\EmployeeManagement\obj\Debug\netcoreapp3.1\Razor\Views\Employee\Create.cshtml.g.cs

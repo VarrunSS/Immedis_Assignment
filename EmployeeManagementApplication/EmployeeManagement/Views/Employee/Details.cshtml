@@ -2,12 +2,15 @@
 
 @{
     ViewData["Title"] = "Details";
+    string lineManagerName = string.Empty;
+    var lineManager = Model.LineManagerIDs.FirstOrDefault();
+    if (lineManager != null)
+        lineManagerName = lineManager.Text;
 }
 
 <h1>Details</h1>
 
 <div>
-    <h4>Employee</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -58,6 +61,15 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Address)
         </dd>
+        @if (!string.IsNullOrEmpty(lineManagerName))
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.LineManagerID)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => lineManagerName)
+            </dd>
+        }
     </dl>
 </div>
 <div>

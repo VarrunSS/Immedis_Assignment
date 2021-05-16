@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using EmployeeManagement.Business.Contract;
 using EmployeeManagement.Service.Common;
+using EmployeeManagement.Service.ViewModel;
 using EmployeeManagement.Service.ViewModel.Param;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 
 namespace EmployeeManagement.Controllers
@@ -47,13 +49,29 @@ namespace EmployeeManagement.Controllers
         {
             var param = new EmployeeViewModelParam() { ID = id };
             var result = await _businessAccess.GetEmployeeAsync(param);
+            result.LineManagerIDs = (await _businessAccess.GetAllEmployeeAsync())
+                .Where(v => v.ID == result.LineManagerID)
+                .Select(v => new SelectListItem
+                {
+                    Text = v.FullName,
+                    Value = v.ID.ToString(),
+                    Selected = (v.ID == result.LineManagerID)
+                }).ToList();
             return View(result);
         }
 
         // GET: EmployeeController/Create
         public async Task<IActionResult> Create()
         {
-            return View();
+            var result = new EmployeeViewModel();
+            result.LineManagerIDs = (await _businessAccess.GetAllEmployeeAsync())
+                .Select(v => new SelectListItem
+                {
+                    Text = v.FullName,
+                    Value = v.ID.ToString(),
+                    Selected = false
+                }).ToList();
+            return View(result);
         }
 
         // POST: EmployeeController/Create
@@ -62,10 +80,10 @@ namespace EmployeeManagement.Controllers
         public async Task<IActionResult> Create([FromForm] EmployeeViewModelParam param)
         {
             var result = await _businessAccess.CreateEmployeeAsync(param);
-            if (result.IsSuccess)
-                return RedirectToAction(nameof(Index));
-            else
+            if (result == null || !result.IsSuccess)
                 ViewBag.ErrorMessage = result.Message;
+            else
+                return RedirectToAction(nameof(Index));
             return View();
         }
 
@@ -74,6 +92,14 @@ namespace EmployeeManagement.Controllers
         {
             var param = new EmployeeViewModelParam() { ID = id };
             var result = await _businessAccess.GetEmployeeAsync(param);
+            result.LineManagerIDs = (await _businessAccess.GetAllEmployeeAsync())
+                .Where(v => v.ID != result.ID)
+                .Select(v => new SelectListItem
+                {
+                    Text = v.FullName,
+                    Value = v.ID.ToString(),
+                    Selected = (v.ID == result.LineManagerID)
+                }).ToList();
             return View(result);
         }
 
@@ -83,10 +109,10 @@ namespace EmployeeManagement.Controllers
         public async Task<IActionResult> Edit(int id, [FromForm] EmployeeViewModelParam param)
         {
             var result = await _businessAccess.UpdateEmployeeAsync(param);
-            if (result.IsSuccess)
-                return RedirectToAction(nameof(Index));
-            else
+            if (result == null || !result.IsSuccess)
                 ViewBag.ErrorMessage = result.Message;
+            else
+                return RedirectToAction(nameof(Index));
             return View();
         }
 
@@ -104,10 +130,10 @@ namespace EmployeeManagement.Controllers
         public async Task<IActionResult> Delete(int id, [FromForm] EmployeeViewModelParam param)
         {
             var result = await _businessAccess.DeleteEmployeeAsync(param);
-            if (result.IsSuccess)
-                return RedirectToAction(nameof(Index));
-            else
+            if (result == null || !result.IsSuccess)
                 ViewBag.ErrorMessage = result.Message;
+            else
+                return RedirectToAction(nameof(Index));
             return View();
         }
     }

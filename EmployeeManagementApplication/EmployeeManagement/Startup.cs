@@ -67,8 +67,13 @@ namespace EmployeeManagement
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "comment",
+                    pattern: "comment/{action=Index}/{empId}/{id?}",
+                    defaults: new { controller = "Comment", action = "Index" });
+
+                endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Employee}/{action=Index}/{id?}");
             });
         }
 

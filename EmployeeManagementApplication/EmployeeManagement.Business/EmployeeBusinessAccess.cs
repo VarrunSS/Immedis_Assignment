@@ -63,6 +63,8 @@ namespace EmployeeManagement.Business
             var resp = await _dataAccess.DeleteEmployeeAsync(param);
             if (resp.IsSuccess)
             {
+                var result = new EmployeeViewModel(param);
+                return result;
             }
             return null;
         }
